@@ -1,0 +1,631 @@
+.calc-ui{
+  --card:#fff; 
+  --text:#111; 
+  --muted:#656f7c; 
+  --border:#e6e9ef;
+  --btn:#28a745; 
+  --btn-fg:#fff; 
+  --dim:#f4f6fa; 
+  --accent:rgb(60, 155, 60); 
+  --warn:#f59e0b;
+}
+html, body, section.instruments {
+    margin: 0;
+    padding: 0;
+    background: #f6f7fb;
+}
+html footer {
+    background: linear-gradient(to bottom, rgba(241, 241, 241, 1) 0%, rgb(246 246 246) 12%);
+}
+/* Р‘Р°Р·РѕРІР°СЏ РєРѕСЂРѕР±РєР° (Р·Р°РјРµРЅСЏРµС‚ body/wrap) */
+.calc-ui{
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  max-width:1100px;
+  margin: 60px auto 20px;
+  padding:0 16px;
+}
+.calc-ui *{ font-weight:300; }
+.calc-ui summary{ font-weight:400; }
+
+/* Р—Р°РіРѕР»РѕРІРѕРє */
+.calc-ui .titlebar{
+  display:flex; 
+  align-items:center; 
+  flex-wrap:wrap; 
+  gap:12px;
+  margin:0;
+}
+.calc-ui .titlebar h1{
+  margin:0; padding:0 0 24px; font-size:22px; font-weight:400;
+}
+.calc-ui .titlebar-ctrls{ display:inline-block; margin:0 0 20px 20px; }
+.calc-ui #formCard button{ font-size:15px; }
+
+@media (max-width:640px){
+  .calc-ui .titlebar-ctrls{ width:100%; margin-left:0; justify-content:flex-start; }
+}
+
+/* Р“СЂРёРґ */
+.calc-ui .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.calc-ui .full-span{ grid-column:1 / -1; }
+@media (max-width:768px){
+  .calc-ui .grid2{ grid-template-columns:1fr; }
+  .calc-ui .full-span{ grid-column:auto; }
+}
+
+/* РљР°СЂС‚РѕС‡РєРё */
+.calc-ui .card, .columns .column.left.card {
+  padding:16px; background:#fff; border:1px solid var(--border);
+  border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+.calc-ui div#lineCard.card{ height:450px; margin:15px 0 0; }
+.calc-ui div#lineCard.card .chart-wrap{ height:400px; margin:15px 0 0; }
+
+/* РџРѕР»СЏ/Р»РµР№Р±Р»С‹ */
+.calc-ui label{ display:block; margin:6px 0 6px; font-size:13px; color:#333; letter-spacing:-0.01em; }
+.calc-ui input[type="text"],
+.calc-ui input[type="number"],
+.calc-ui select{
+  width:calc(100% - 23px); height:34px; padding:0 10px;
+  border:1px solid #CCC; border-radius:6px; background:#fff; font-size:14px;
+}
+.calc-ui input[type="text"], 
+.calc-ui input[type="number"] {
+    border-radius: 6px 6px 0 0;
+}
+.calc-ui details input[type=text] {
+    border-radius: 6px;
+}
+.calc-ui input.small{ max-width:180px; height:32px; margin-top:2px; }
+.calc-ui .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.calc-ui .row.right{ justify-content:flex-end; }
+
+@media (max-width:550px) {
+  .calc-ui #donutCard .donut-wrap,
+  .calc-ui .donutInfo,
+  .card.seo .columns .column.left,
+  .card.seo .columns .column.right {
+    display:block;
+    width:100%;
+  }
+}
+
+/* VAT checkbox row */
+.calc-ui label.row.vat{ display:block; margin:10px 0 20px; vertical-align:top; }
+.calc-ui label.row.vat input#feeVat{ position:relative; top:1px; margin:0 3px 0 0; }
+.calc-ui label.row.vat .textVat{ display:inline-block; width:calc(100% - 60px); padding-top:2px; }
+
+/* Р’РЅСѓС‚СЂРµРЅРЅРёРµ РєРѕР»РѕРЅРєРё С„РѕСЂРјС‹ */
+.calc-ui #formCard .columns{ display:block; width:100%; margin:10px 0 5px; vertical-align:top; }
+.calc-ui #formCard.card .columns:first-child{ margin-top:5px; }
+.calc-ui #formCard .columns .column{ display:inline-block; width:calc(50% - 20px); vertical-align:top; }
+.calc-ui #formCard .columns .column.left{ margin-right:15px; }
+.calc-ui #formCard .column.left.larger{ margin-right:30px; }
+@media (max-width:768px){
+  .calc-ui #formCard .columns .column{ display:block; width:100%; margin-right:0; }
+}
+
+/* РљРЅРѕРїРєРё */
+.calc-ui .btn{ padding:10px 14px; border:none; border-radius:8px; font-weight:700; cursor:pointer; }
+.calc-ui .btn-primary{ width:calc(33% - 10px); margin-right:5px; background:var(--btn); color:var(--btn-fg); }
+.calc-ui .btn-ghost{ background:var(--dim); color: #111; }
+.calc-ui .btn-ghost:hover, .calc-ui .btn-ghost:target{ background:#e4e4e4; color:#70AD40; }
+.calc-ui .btn:disabled{ opacity:.55; cursor:not-allowed; }
+button#btnCalc { font-weight: 400; }
+/* РњР°Р»РµРЅСЊРєРёРµ В«РїСЂРёР·СЂР°С‡РЅС‹РµВ» */
+.calc-ui .btn.btn-ghost.small{
+  margin-right:15px; padding:8px 10px; border:1px solid #e5e5e5; border-radius:6px;
+  background:rgb(248 248 248); font-size:13px; font-weight:normal; line-height:1.2; color: #8f8f8f;
+}
+
+/* РЎРїРµС†-РєРЅРѕРїРєРё */
+.calc-ui button#startBtn,
+.calc-ui button#btnAutofill{
+  width:170px; height:34px;
+  background:linear-gradient(to bottom, #a0c681 1%, #71ad40 100%);
+  border:1px solid #88b067; border-radius:6px; color:#fff; font-size:14px; font-weight:normal; text-shadow:none;
+}
+.calc-ui button#startBtn{ position:relative; top:0; left:0; height:36px; margin:0; font-weight:300; }
+.calc-ui button#btnAutofill{ width:100%; height:36px; margin:27px 0 0; line-height:12px; }
+.calc-ui button#startBtn:hover,
+.calc-ui button#startBtn:target,
+.calc-ui button#btnAutofill:hover,
+.calc-ui button#btnAutofill:target{ background:#76b326; border:1px solid #88b067; color:#ececec; }
+
+.calc-ui button#btnReset,
+.calc-ui button#btnPrint{
+  width:calc(33% - 10px); margin-right:5px; background:#eee; color:#1a2b3c; font-weight:300;
+}
+.calc-ui button#btnPrint{ margin-right:0; }
+.calc-ui .btn#btnReset:disabled:hover,
+.calc-ui .btn#btnReset:disabled:target,
+.calc-ui .btn#btnPrint:disabled:hover,
+.calc-ui .btn#btnPrint:disabled:target{ background:#eee; color:#1a2b3c; }
+
+.calc-ui button#btnCopy{ width:132px; font-weight:300; }
+.calc-ui .row.left.copy{ margin-top:15px; }
+.calc-ui button#btnCopy:hover, 
+.calc-ui button#btnCopy:target,
+.calc-ui button#btnReset:hover, 
+.calc-ui button#btnReset:target,
+.calc-ui button#btnPrint:hover, 
+.calc-ui button#btnPrint:target{ background-color:green; border:none; color:#fff; text-shadow:none; }
+
+/* РљРЅРѕРїРєР° Show hints РІ titlebar */
+.calc-ui #hintToggle{ background:#eaecf6; display:none; }
+
+/* РџРµСЂРµРєР»СЋС‡Р°С‚РµР»СЊ РІР°Р»СЋС‚ */
+.calc-ui .toggle{ display:inline-flex; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+.calc-ui .toggle button{ background:#eee; border:none; padding:8px 28px; cursor:pointer; }
+.calc-ui .toggle button.active{ background:#70AD40; border:1px solid #619833; color:#fff; }
+.calc-ui .row.currency label{ display:block; width:100%; margin-bottom:0; }
+.calc-ui #curToggle{ margin:0 0 15px; }
+.calc-ui span#curShown { display: none; }
+
+/* Р’С‹Р±РѕСЂ РїРµСЂРёРѕРґР° */
+.calc-ui #startShown{
+  position:relative; top:0; display:inline-block; height:20px; margin:0 0 0 15px; padding:0 0 0 16px;
+   background-size:12px 12px; background-position:0 1px; background-repeat:no-repeat;
+  font-size:14px; line-height:14px; color:#111;
+}
+.calc-ui #startShown:first-letter{ text-transform:uppercase; }
+.calc-ui .chooseStartPeriod{ margin-top:-10px; margin-bottom:15px; }
+.calc-ui .chooseStartPeriod .row{
+  display:block; width:calc(100% - 10px); margin-bottom:20px; padding:1px;
+  background:#f5f9fd; border-radius:6px; border:1px solid #edeff3;
+}
+
+/* KPI */
+.calc-ui .kpis{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+.kpis.valuation { display:block; width:100%; height:auto; }
+.kpis.valuation .kpi.withHint { display: inline-block; width: calc(33% - 30px); }
+.kpis.valuation .kpi.withHint:nth-child(1), .kpis.valuation .kpi.withHint:nth-child(2) {margin-right: 3px;}
+.calc-ui .kpi{ position:relative; padding:12px; border:1px solid var(--border); border-radius:6px; background:#fafbff; }
+.calc-ui .kpi small{ position: relative; top: -5px; font-size: 14px; font-weight: 400; letter-spacing: -0.02em; color: #53585e; }
+.calc-ui .kpi b{ display:block; margin-top:4px; font-size:17px; font-weight:300; }
+.calc-ui .kpi b:first-letter{ text-transform:uppercase; }
+.calc-ui .cur-badge{
+  position:absolute; top:8px; right:8px; background:#eef2f7; border:1px solid var(--border);
+  border-radius:6px; padding:2px 6px; font-size:12px; color:#333;
+}
+
+/* Lists + helpers */
+.calc-ui .list{ margin:8px 0 0; padding:0; list-style:none; }
+.calc-ui .list li{ display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid #eceef2; }
+.calc-ui .list li:last-child{ border-bottom:none; }
+.calc-ui .muted{position: relative; top: -7px; display: block; margin: 0; padding-top: 10px; padding-left: 1px; font-size: 12px; color: var(--text);}
+.calc-ui details span.muted { top: 0; font-size: 14px; }
+.calc-ui .hidden{ display:none !important; }
+
+/* Notices */
+.calc-ui .notices{
+  display:block; width:100%; max-width:calc(100% - 24px);
+  margin:18px 0 10px; padding:12px; background:#fcfcfc; border:1px solid var(--border); border-radius:6px;
+}
+.calc-ui .notices p{ margin:0 0 10px; font-size:13px; font-weight:400; }
+.calc-ui .notices p b{ font-weight:400; }
+.calc-ui .notices ul{ margin:0; padding-left:18px; font-size:13px; }
+.calc-ui .notices ul li{ margin-bottom:10px; line-height:1.55em; font-size:13px; }
+.calc-ui .notices ul li:last-child{ margin-bottom:0; }
+
+/* РЎР»Р°Р№РґРµСЂС‹ */
+.calc-ui #formCard .range{width:calc(100% - 2px); margin:-12px 0 0 -2px;}
+.calc-ui input#propertyValue,
+.calc-ui input#interestRate, 
+.calc-ui input#downPayment, 
+.calc-ui input#loanAmount, 
+.calc-ui input#loanDuration{ height:34px; border-radius:6px 6px 0 0; }
+input#interestRate {margin-top: 2px;}
+.calc-ui .range input[type="range"]{ width:100%; -webkit-appearance:none; appearance:none; height:6px; border-radius:999px; background:#d7d9e3; outline:none; }
+.calc-ui .range input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none; width:16px; height:16px; border-radius:50%;
+  background:var(--accent); cursor:pointer; border:3px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.15);
+}
+.calc-ui .range input[type="range"]::-moz-range-thumb{ width:20px; height:20px; border:none; border-radius:50%; background:var(--accent); cursor:pointer; }
+.calc-ui .range .minmax{ display:flex; margin-top:2px; margin-bottom:10px; justify-content:space-between; font-size:12px; color:var(--muted); }
+.calc-ui .range .minmax *{ font-size:13px; }
+
+.calc-ui #formCard div label{ margin-top:0; font-size:14px; font-weight:400; letter-spacing:-0.035em; }
+
+/* Р—Р°РіРѕР»РѕРІРѕРє РїРѕР»СЏ */
+.calc-ui .fieldhead{ display:flex; align-items:center; justify-content:space-between; }
+.calc-ui .pct{ position: relative; top: -2px; font-size: 13px; font-weight: 600; color: #419745; }
+.calc-ui #pvPct{ display:none; }
+
+/* Fees / details */
+.calc-ui details{ display:block; margin:15px 0 30px; }
+.calc-ui details .row{ margin-top:5px; }
+
+/* Donut legend */
+.calc-ui #donutLegend{ padding-top:0; font-size:14px; line-height:1.5em; }
+.calc-ui .legend-item{ display:flex; align-items:center; gap:8px; margin:6px 0; }
+.calc-ui .legend-item span b{ float:left; width:160px; padding-right:10px; font-weight:normal; }
+.calc-ui .legend-dot{ width:12px; height:12px; border-radius:50%; display:inline-block; }
+
+.calc-ui .mortgageSummary{ margin:6px 0 0; padding-left:18px; }
+.calc-ui .mortgageSummary li { margin: 5px 0 10px; font-size: 14px; }
+
+/* Р—Р°РіРѕР»РѕРІРєРё РІРЅСѓС‚СЂРё РєР°СЂС‚РѕС‡РµРє */
+.calc-ui .card h3{ font-size:16px; font-weight:normal; }
+.calc-ui #afterCalc h3{ margin-top:25px !important; padding-bottom:5px; border-bottom:1px solid #e0e0e0; }
+.calc-ui #breakdown.list li{ padding:8px 0; }
+.calc-ui #breakdown.list li span, 
+.calc-ui #breakdown.list li strong { font-size: 15px; font-weight: normal; letter-spacing: -0.02em; }
+.calc-ui #breakdown.list li strong { min-width: 150px; text-align: right; }
+.calc-ui #breakdown.list li strong:first-letter { text-transform: uppercase; }
+.calc-ui .mortgageSummary li i { font-style: normal; font-weight: 400; }
+
+/* Icon hint inside label */
+.calc-ui #formCard label i{
+  display:inline-block; width:14px; height:14px; margin-left:6px; background:#fff; 
+   
+  background-size:15px auto; background-repeat:no-repeat; background-position:-1px -1px;
+  opacity:.65; vertical-align:middle; cursor:pointer; outline:none;
+}
+.calc-ui #formCard label i:hover,
+.calc-ui #formCard label i:target{
+  outline:none !important; background-position:-1px -16px; opacity:1; box-shadow:none; border:none;
+}
+.calc-ui #formCard label i:focus{ outline:none; box-shadow:none; border:none; }
+
+/* ===== Hints (РєР°Рє РІ pricing) ===== */
+.calc-ui #formCard .hint.hidden{ display:none; }
+.calc-ui #formCard .hint{
+  display:none; position:absolute; left:0 !important; right:auto; top:29px; z-index:30; width:220px;
+  padding:10px 12px; background:rgba(220,236,220,.5); backdrop-filter:blur(10px);
+  border:1px solid rgb(208 228 208); border-radius:6px; box-shadow:0 6px 16px rgba(0,0,0,.06);
+  font-size:13px; line-height:1.6; letter-spacing: -0.01em; color:#111;
+}
+.calc-ui #formCard #currencyToMortgage.hint.visible{ left:0 !important; }
+.calc-ui #formCard #annualInterestRate.hint.visible{ position:absolute; top:21px; left:0 !important; }
+.calc-ui #formCard #startMortgagePeriod.hint.visible{ top:21px; left:0 !important; }
+.calc-ui #formCard #propertyValue.hint.visible{ left:0 !important; }
+.calc-ui #formCard #downPayment.hint.visible{ left:0 !important; }
+.calc-ui #formCard #loanAmount.hint{ top:29px !important; }
+.calc-ui #formCard #loanPeriod.hint,
+.calc-ui #formCard #conveyance.hint,
+.calc-ui #formCard #brokerCommission.hint,
+.calc-ui #formCard #mortgageProcessing.hint,
+.calc-ui #formCard #registrationFee.hint,
+.calc-ui #formCard #valuation.hint{ top:23px; }
+.calc-ui #formCard .hint.visible,
+.calc-ui #formCard .hint[aria-hidden="false"]{ display:block; }
+.calc-ui #formCard .hint.visible::before{
+  content:""; position:absolute; top:-7px; right:auto;
+  border-width:0 6px 6px 6px; border-style:solid;
+  border-color:transparent transparent rgb(208 228 209) transparent;
+}
+
+/* РЇРєРѕСЂСЏ РґР»СЏ Р°Р±СЃРѕР»СЋС‚РЅС‹С… РїРѕРґСЃРєР°Р·РѕРє */
+.calc-ui #formCard .fieldhead,
+.calc-ui #formCard .row.currency,
+.calc-ui #formCard .chooseStartPeriod,
+.calc-ui #formCard .column.right > div,
+.calc-ui #formCard .column.left > div{ position:relative; }
+
+/* Donut */
+.calc-ui #donutCard{ background:#fafbfe; }
+.calc-ui #donutCard .donut-wrap{
+  position:relative; display:inline-block; width:320px; height:342px; margin:0; padding:10px 20px;
+  background:#fff; border:1px solid #ececec; border-radius:8px; overflow:visible;
+}
+.calc-ui .donutInfo{
+  padding:10px 20px; border:1px solid #ececec; border-radius:8px; background:#fff;
+}
+@media (max-width:768px){
+  .calc-ui #donutCard{ flex-direction:column; }
+  .calc-ui #donutCard .donut-wrap{ margin:0 auto; }
+}
+.calc-ui .donut-wrap canvas{ position:absolute; top:0; inset:0; margin:60px auto -30px; }
+
+/* Donut grid */
+.calc-ui .donut-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:16px; align-items:center; }
+@media (max-width:768px){ .calc-ui .donut-grid{ grid-template-columns:1fr; } }
+
+/* РљРЅРѕРїРєРё-С…РёРЅС‚С‹ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ СЃРєСЂС‹С‚С‹ СЃР»РµРІР° (РёСЃРїРѕР»СЊР·СѓРµРј РёРєРѕРЅРєСѓ <i>) */
+.calc-ui button.hintToggle{ display:none; }
+
+/* summary i (РІ details) */
+.calc-ui summary i{
+  position:relative; top:-3px; margin-left:10px; padding:3px 6px; zoom:65%;
+  background:#f5f5f5; border:1px solid #a7a7a7; border-radius:4px;
+  font-style:normal; font-weight:300; color:#525252;
+}
+.calc-ui summary i:first-letter{ text-transform:uppercase; }
+
+.calc-ui .subHeader,
+.calc-ui .card h3,
+.calc-ui .donutInfo h3.summary{
+  margin:0 0 10px; font-size:18px; font-weight:400; color:#000;
+}
+.calc-ui ul#mortgageSummary li{ margin-bottom:10px; font-size:15px; }
+.calc-ui ul#mortgageSummary li i{ display:inline-block; font-style:normal; }
+
+/* ===== Breakdown (РїСЂР°РІР°СЏ РєР°СЂС‚РѕС‡РєР°) hints ===== */
+.calc-ui #resultCard h3.calculation{ margin:2px 0 8px; }
+.calc-ui #resultCard #breakdown li{ position:relative; }
+.calc-ui .row.vat .withHint,
+.calc-ui #resultCard #breakdown .withHint { position: relative; display: inline-flex; width: 100%; align-items: center;}
+/* ===== РЎС‚РёР»СЊ РґР»СЏ VAT hint ===== */
+
+.row.roi.vat input#includeVAT, .calc-ui .row.vat .withHint { display: inline-block; width: fit-content; margin-right: 0;}
+
+.calc-ui #resultCard #breakdown button.hintToggle{
+  display:inline-block; width:14px; height:14px; margin-left:6px; border:none; background:#fff;
+   background-size:16px auto; 
+  background-repeat:no-repeat; background-position:-1px -1px; cursor:pointer; opacity:.65;
+}
+.calc-ui #resultCard #breakdown button.hintToggle:hover,
+.calc-ui #resultCard #breakdown button.hintToggle:focus{
+  opacity:1; outline:none; background-position:-1px -17px;
+}
+.calc-ui #resultCard #breakdown .hint{
+  display:none; position:absolute; left:0; top:22px; z-index:30; width:220px;
+  padding:10px 12px; background:rgba(220,236,220,.5); backdrop-filter:blur(10px);
+  border:1px solid rgb(208 228 208); border-radius:6px; box-shadow:0 6px 16px rgba(0,0,0,.06);
+  font-size:13px; line-height:1.6; color:#111;
+}
+.calc-ui #resultCard #breakdown .hint.visible,
+.calc-ui #resultCard #breakdown .hint[aria-hidden="false"]{ display:block; }
+.calc-ui #resultCard #breakdown .hint.visible::before{
+  content:""; position:absolute; top:-6px; left:8px;
+  border-width:0 6px 6px 6px; border-style:solid;
+  border-color:transparent transparent rgba(220,236,220,.7) transparent;
+}
+@media (max-width:800px){
+  .calc-ui #resultCard #breakdown .hint{ position:absolute; width:auto; margin:8px 0 0; box-shadow:none; }
+  .calc-ui #resultCard #breakdown .hint.visible::before{ display:none; }
+}
+
+/* РџРµС‡Р°С‚СЊ (СЂР°СЃС€РёСЂРµРЅРЅР°СЏ) */
+.calc-ui a.printLogo{
+  position:relative; z-index:100; display:block; width:200px; height:32px; margin:24px 0 8px 0; vertical-align:top;
+}
+.calc-ui .print-header.only-print, span#curSelected{ display:none; }
+
+.print-url{
+  word-break:break-all;  /* РµСЃР»Рё РґР»РёРЅРЅС‹Р№ URL */
+}
+
+@media print{
+  @page{ size:A4; margin: 10mm; }
+  .calc-ui .no-print, .calc-ui #curToggle { display:none !important; }
+  .calc-ui{ background:#fff; box-shadow:none; border:none; margin:0 !important; }
+  .calc-ui .card{ box-shadow:none !important; border:1px solid #ddd; }
+  .cur-shown{ display: block; padding:2px 8px; border:1px solid #333; border-radius:4px;
+  font-weight:600; line-height:1.6; }
+  .columns, #curToggle { display: block !important; } 
+  .column.right, .cur-shown{ display:inline-block !important; }  
+  div#resultCard, .card.seo, .card.seo h2 { display: block; padding-top: 60px; color: #000; }    
+  nav.lang-switcher, button.requestFeedback, button.requestFeedback.mobile, button.showMenu,
+  .row.currency, .calc-ui .range .minmax {display:none;}
+  .row.currency, label#currencyToMortgage, label#currencyToROI, .calc-ui .print-header.only-print, .calc-ui a.printLogo, .calc-ui #curToggle, .calc-ui label.row.vat .textVat, .calc-ui 
+  div#printDate, .calc-ui label.row.vat { display: block; height: 10px; margin: 0; padding: 0; font-size: 14px; }
+  div#printDate, .print-url {display: inline-block !important; margin: 0 20px 0 0  !important; font-size: 10px !important; color: #000;}
+  .calc-ui span#curShown {margin-top: 5px;}
+  .calc-ui label.row.vat,
+  .calc-ui label.row.vat .textVat { position:relative; top: -5px; width: 320px; height: 15px; margin-bottom: 20px; }
+  .calc-ui .print-header.only-print { height:60px; margin: 20px 0 40px 0;}
+  .calc-ui a.printLogo img, .calc-ui .print-header.only-print h1 { display: block; margin: 20px 0 10px 0; font-size: 18px;}
+  .calc-ui summary { display: block; height: 15px; margin-top: 25px; }
+  .calc-ui #formCard summary .column { margin-top: 0 !important; margin-bottom: 0 !important; padding: 0 !important; }
+  .calc-ui #formCard div label#currencyToMortgage { position: relative; top: 0; margin: 0; padding: 0 0 20px 0;}
+  .calc-ui #formCard .row.currency, .calc-ui #formCard .columns .column.left, .calc-ui #formCard .columns .column.right {display:inline-block !important; width: 240px;}  
+  .calc-ui .card { margin: 0; padding: 0; }
+  .calc-ui #curToggle button, .calc-ui #formCard .columns .column, .calc-ui div.chooseStartPeriod, .calc-ui div.column, .column.left.larger.loanAmount  { display: inline-block; width: 50%; height: auto; padding: 0; margin: 0; vertical-align: top;}
+  .calc-ui #formCard #curToggle button.active, .calc-ui .toggle button.active, .card.seo h2 { display: block; color: #999; }
+  .calc-ui .chooseStartPeriod .row { width: 240px; background: transparent; border: 1px solid #111;}
+  .calc-ui #formCard .chooseStartPeriod { width: 50%; }
+  .calc-ui #formCard.card .columns, .calc-ui #formCard .columns { display: block !important; width: 100% !important; margin: 0 !important; padding: 0 !important;}
+  .calc-ui #formCard .row.currency { margin-top: 0; padding-top: 0; }
+  .calc-ui #formCard .chooseStartPeriod { margin-top: 20px; padding-top: 0; }
+  .calc-ui #formCard .column.left.larger { padding-right: 40px; }
+  .column { display: inline-block !important; }
+  .calc-ui #formCard.card input[type=text] { width: 220px; }
+  .calc-ui #formCard .columns .column, .calc-ui div.chooseStartPeriod, .calc-ui label.row.vat .textVat { margin: 10px 0 5px 0;}
+  .calc-ui label.row.vat .textVat { display: block; padding: 20px 0 20px 0;}
+  .calc-ui #formCard .column div, .calc-ui #formCard div label, .calc-ui #formCard .column input { width: 240px !important; }
+  .calc-ui #formCard .column input { border-radius: 6px; border: 1px solid #111;}
+  calc-ui #formCard div, .calc-ui .chooseStartPeriod { margin: 40px 0 0 0;}
+  .calc-ui .toggle button { display: inline-block !important; }
+  .calc-ui .print-header.only-print h1 { margin: 30px 0 10px 0; padding: 0; font-size: 24px; font-weight: bold; }
+  .calc-ui html, .calc-ui{ background:#fff !important; color:#000 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .calc-ui .grid2{ display:block !important; gap:0 !important; }
+  .calc-ui #donutCard, .calc-ui div#lineCard.card { position: relative; top: 20px; padding-top: 20px; background: #fff;}
+  label#startMortgagePeriod {padding-top: 20px; }
+  .calc-ui .notices { zoom: 60%; }
+  .card.seo h2, .calc-ui details span.muted { color: #000 !important; }
+  .calc-ui .card{ padding: 0; background: #fff; box-shadow:none !important; border: none; border-radius: 0; page-break-inside:avoid; }
+  .calc-ui > h1{ margin:0 0 4mm 0; font-size:20pt; line-height:1.25; }
+  .calc-ui .print-date{ display:block; margin:0 0 3mm 0; font-size:11pt; color:#666; }
+  .calc-ui .no-print, .calc-ui .btn, .calc-ui .toggle, .calc-ui input[type="range"],
+  .calc-ui details > summary i, .calc-ui .hint, .calc-ui #curToggle button, .calc-ui .pct { display:none !important; }
+  .calc-ui details .column { display: inline-block; margin: 10px 40px 0; padding: 0;}
+  .calc-ui input, .calc-ui select, .calc-ui textarea{ border:1px solid #000 !important; box-shadow:none !important; background:#fff !important; color:#000 !important; }
+  .row.roi.vat, .calc-ui #formCard div.row.roi.vat label { display: block; width: 420px !important; }
+  .calc-ui .cur-badge{ border:1px solid #333; }
+  .calc-ui canvas{ max-width:100% !important; height:auto !important; }
+  .calc-ui #resultCard{ margin-top:10mm; clear:both; }
+  .calc-ui #donutCard{ margin-top:10mm; clear:both; }
+  .calc-ui #lineCard{  margin-top:8mm;  clear:both; }
+  .calc-ui #resultCard, .calc-ui #donutCard, .calc-ui #lineCard{ break-inside:avoid; }
+  .calc-ui #formCard .columns .column > * + *{ margin-top:0; }
+  .calc-ui #formCard .row { margin:5px 0; }
+  label#currencyToMortgage, label#currencyToROI { display: block; height: 5mm; }
+  label#currencyToMortgage { margin-bottom: -4mm !important; }
+  span#curShown.printMargin { display: block; margin: 6px 0 0 0; }
+  .calc-ui input { border: 1px solid #000; }
+  .calc-ui .subHeader, .calc-ui .card h3, .calc-ui .donutInfo h3.summary, .card.seo .columns .column.left h2, .calc-ui #formCard.card .columns:first-child { margin: 0; padding: 0; font-size:15px; }
+  .card.seo, .card.seo h2 { display: block; width: 100%; padding-top: 20px; padding-bottom: 20px !important; }
+  div#resultCard, .calc-ui div#lineCard.card.full-span { page-break-after: always; }
+  .calc-ui .mortgageSummary li, .card.seo .columns .column.left p, .card.seo .columns .column.left ul li, .calc-ui .mortgageSummary li i { margin: 0; padding-bottom: 3px; font-size: 11px; line-height: 1.3em;}
+  .card.seo .column.right { width: 240px; height: 420px; }
+  .card.seo .column.left p, .card.seo .column.left ul li, .card.seo .column.left strong, .card.seo .column.left a { font-size: 11px; }
+  .card.seo .columns .column.right { background-size: auto 100% !important; background-position: 100% 0 !important; overflow: visible; }
+  .calc-ui .legend-item span b, .disclaimer p {font-size: 12px;}
+  footer div.columns div.column.right, footer div.columns div.column.right ul, .calc-ui #formCard label i, .calc-ui .cur-badge { display: none;} 
+}
+
+/* SEO Р±Р»РѕРєРё (РµСЃР»Рё Р¶РёРІСѓС‚ РІРЅСѓС‚СЂРё .calc-ui) */
+.calc-ui div#instruments.seoBlock{ margin-top:-20px; }
+.calc-ui section.instruments article#instruments .seoBlock .wrapper *{ color:#222; }
+.calc-ui section.instruments article#instruments .seoBlock .wrapper{
+  max-width:1100px !important; margin-top:0; padding-top:0;
+}
+.calc-ui section.instruments article#instruments .seoBlock .wrapper h2{
+  margin-bottom:10px; line-height:1.2em; text-align:left;
+}
+.calc-ui section.instruments article#instruments .seoBlock .wrapper h2 b{
+  display:block; margin-bottom:3px; font-size:16px; font-weight:300;
+}
+.calc-ui section.instruments article#instruments .seoBlock .wrapper h2 small{ display:block; margin:0; padding:0; font-size:13px; }
+.calc-ui section.instruments article#instruments .seoBlock .wrapper p{
+  margin:0 0 5px; font-size:12px; font-weight:300;
+}
+.calc-ui section.instruments article#instruments .seoBlock .wrapper p strong{ font-size:12px; font-weight:300; }
+.calc-ui section.instruments article#instruments .seoBlock .wrapper p a.contextURL{
+  font-size:12px; font-weight:300; color:#111; text-decoration:none; border-bottom:1px dotted #111;
+}
+.calc-ui section.instruments article#instruments .seoBlock .wrapper p a.contextURL:hover,
+.calc-ui section.instruments article#instruments .seoBlock .wrapper p a.contextURL:target{
+  color:#3399CC; border-bottom-color:#3399CC;
+}
+div#impliedPrice {
+    display: none;
+}
+.card.seo h2 {
+    margin: 0;
+    font-size: 18px !important;
+    font-weight: 400;
+}
+.card.seo .columns {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+@media (min-width: 550px) {
+  .calc-ui .donutInfo{
+    float: right; 
+    display: inline-block; 
+    width: calc(100% - 420px);
+  }
+  .card.seo .columns .column.left {
+    display: inline-block;
+    width: calc(100% - 280px);
+    height: auto;
+    vertical-align: top;
+  }
+}
+.card.seo .columns .column.right.mortgageCalculator {
+  display: inline-block;
+  width: 240px;
+  height: 240px;
+  background-image: url("../img/instruments/mortgage-calculator-preview.webp");
+  background-position: 100% -60px;
+  background-size: auto calc(100% + 40px);
+  background-repeat: no-repeat;
+  vertical-align: top;
+}
+.card.seo .columns .column.right.valuationCalculator {
+  display: inline-block;
+  width: 240px;
+  height: 240px;  
+  background-image: url("../img/instruments/valuation-calculator-preview.webp");
+  background-position: 100% -60px;
+  background-size: auto calc(100% + 40px);
+  background-repeat: no-repeat;
+  vertical-align: top;
+}
+.card.seo .columns .column.right.roiCalculator {
+  display: inline-block;
+  width: 240px;
+  height: 240px;
+  background-image: url("../img/instruments/roi-calculator-preview.webp");
+  background-position: -180px -60px;
+  background-size: auto 120%;
+  background-repeat: no-repeat;
+  vertical-align: top;
+}
+.card.seo ul {
+    margin-left: 0;
+    padding-left: 15px;
+}
+.card.seo ul li {
+  margin-bottom: 10px;
+}
+@media (min-width: 1000px) and (max-width: 1099px) {
+  .disclaimer {
+    max-width: 1000px;
+    margin: 20px auto 40px;
+  }
+}
+@media (min-width: 1100px) {
+  .disclaimer {
+    max-width: 1078px;
+    margin: 20px auto 40px;
+  }
+}
+.card.seo {
+    margin: 20px 0;
+}
+.disclaimer {
+    margin-top: 20px;
+}
+.disclaimer p {
+    color: #555;
+}
+.disclaimer:hover p,
+.disclaimer:target p {
+    color: #333;
+}
+.disclaimer {
+    margin: 20px auto 60px;
+    padding-left: 15px;
+    border-left: 2px solid #a9d27a;
+}
+button.showMenu {    
+    float: right;
+    margin-right: 15px;
+    padding: 8px 14px;
+    border: 1px solid #b9bcc7;
+    border-radius: 6px;
+    background: rgb(248 248 248);
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1.2;
+    color: #444;
+}
+button.showMenu:hover,
+button.showMenu:target,
+.calc-ui .btn.btn-ghost.small:hover,
+.calc-ui .btn.btn-ghost.small:focus {
+    border: 1px solid #3399CC;  
+    background: #fafbff;    
+    color:#3399CC;
+    outline: none;
+}
+.closeMenu {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: .5em;
+  right: .5em;
+}
+.row.roi.vat {
+    margin: 10px 0 20px;
+}
+.row.roi.vat input#includeVAT {
+    margin-right: 0;
+}
+.calc-ui #formCard div.row.roi.vat label {
+    margin: 0;
+    padding: 0;
+}la
+/* GitHub Portfolio Edition: standalone fallbacks */
+.printLogoText { display:none; font-size:22px; font-weight:600; margin:20px 0 10px; }
+@media print { .printLogoText { display:block; } }
